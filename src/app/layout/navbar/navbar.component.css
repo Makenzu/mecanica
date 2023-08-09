@@ -3360,7 +3360,9 @@
   
   .nav-link {
     display: block;
-    padding: 0.5rem 1rem; }
+    padding: 0.5rem 1rem;
+    box-shadow: 2px 2px 5px #130202;
+    height: 60px; }
     .nav-link:hover, .nav-link:focus {
       text-decoration: none; }
     .nav-link.disabled {
@@ -8177,7 +8179,9 @@
   .ftco-navbar-light {
     background: #202040 !important;
     z-index: 3;
-    padding: 0; }
+    padding: 0;
+    box-shadow: 2px 2px 5px #130202;
+    height: 70px; }
     @media (max-width: 991.98px) {
       .ftco-navbar-light {
         background: #000 !important;
