@@ -6,7 +6,10 @@
              src="assets/img/add_user.png" 
              routerLink="/tecnicos/form" 
              title="crear">
-        <table class="table table-hover table-striped">
+        <div class="alert alert-info" style="margin-top: 10px;" *ngIf="tecnicos?.length==0">
+            No hay registros en el sistema.
+        </div>
+        <table class="table table-hover table-striped" *ngIf="tecnicos.length>0 && tecnicos != undefined">
             <thead class="table" >
                 <tr style="text-align: center;">
                     <th class="thHead">Id</th>
@@ -40,6 +43,15 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page) = "paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2"
+              aria-label="Select page">
+        </mat-paginator>
         <br>
     </div>
 </div>
