@@ -3,15 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 //import { map } from 'rxjs/operators';
 import { Tecnico } from '../models/tecnico';
+import { apiTecnicos } from 'src/environments/environment';
+import { ContTypeApp } from 'src/environments/contentType';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TecnicosService {
-
-  private baseEndpoint = 'http://localhost:8090/api/tecnicos';
-
-  private cabeceras: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+  private header: HttpHeaders = new HttpHeaders(ContTypeApp.json);
+  private baseEndpoint = apiTecnicos.apiRoot;
 
   constructor(private http: HttpClient) { }
 
@@ -35,11 +36,11 @@ export class TecnicosService {
   }
 
   public crear(tecnico: Tecnico): Observable<Tecnico>{
-    return this.http.post<Tecnico>(this.baseEndpoint, tecnico, { headers: this.cabeceras});
+    return this.http.post<Tecnico>(this.baseEndpoint, tecnico, { headers: this.header});
   }
 
   public editar(tecnico: Tecnico): Observable<Tecnico>{
-    return this.http.put<Tecnico>(`${this.baseEndpoint}/${tecnico.id}`, tecnico, { headers: this.cabeceras});
+    return this.http.put<Tecnico>(`${this.baseEndpoint}/${tecnico.id}`, tecnico, { headers: this.header});
   }
   
   public eliminar(id: number): Observable<void>{

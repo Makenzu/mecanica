@@ -1,23 +1,46 @@
-<br>
-<h1>{{titulo}}</h1>
-<table class="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nomnbre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Creado en</th>
+<div class="card bg-light mb-3">
+    <div class="card-header divHead">{{titulo}}</div>
+    <div class="card-body divBody">
+        <img class="my-2" 
+             style="width: 40px; box-shadow: 2px 2px 5px #130202; border-radius: 5px; margin-left: 8px;"
+             src="assets/img/add_user.png" 
+             routerLink="/tecnicos/form" 
+             title="crear">
+        <table class="table table-hover table-striped">
+            <thead class="table" >
+                <tr style="text-align: center;">
+                    <th class="thHead">Id</th>
+                    <th class="thHead">Nomnbre</th>
+                    <th class="thHead">Apellido</th>
+                    <th class="thHead">Email</th>
+                    <th class="thHead">Creado en</th>
+                    <th class="thHead">Editar</th>
+                    <th class="thHead">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tecnico of tecnicos">
+                    <td>{{tecnico.id}} </td>
+                    <td>{{tecnico.nombre | uppercase}}</td>
+                    <td>{{tecnico.apellido | uppercase}}</td>
+                    <td>{{tecnico.email}}</td>
+                    <td>{{tecnico.createAt | date: 'yyyy/MM/dd HH:mm aa'}}</td>
+                    <td style="text-align: center;">
+                        <img src="assets/img/reg_edit.png" 
+                             style="width: 25px; box-shadow: 2px 2px 5px #130202;" 
+                             [routerLink]="['/tecnicos/form', tecnico.id]" 
+                             title="Editar">
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="assets/img/delete_reg.png" 
+                             style="width: 25px; box-shadow: 2px 2px 5px #130202;" 
+                             (click)="eliminar(tecnico)"
+                             title="Eliminar">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+    </div>
+</div>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let tecnico of tecnicos">
-            <td>{{tecnico.id}}</td>
-            <td>{{tecnico.nombre}}</td>
-            <td>{{tecnico.apellido}}</td>
-            <td>{{tecnico.email}}</td>
-            <td>{{tecnico.createAt}}</td>
-        </tr>
-    </tbody>
-</table>

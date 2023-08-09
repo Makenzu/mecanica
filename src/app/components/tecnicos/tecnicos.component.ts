@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2'
 import { TecnicosService } from 'src/app/services/tecnico.service';
 import { Tecnico } from 'src/app/models/tecnico';
 
@@ -10,7 +11,7 @@ import { Tecnico } from 'src/app/models/tecnico';
 export class TecnicosComponent implements OnInit {
 
   public titulo: string = 'Listado de Tecnicos';
-  public tecnicos!: Tecnico[];
+  public tecnicos: Tecnico[] = [];
 
   constructor(private service: TecnicosService) {}
 
@@ -21,6 +22,29 @@ export class TecnicosComponent implements OnInit {
     // this.service.listar().subscribe(tecnicos => {
     //   this.tecnicos = tecnicos;
     // })
+  }
+
+  public eliminar(tecnico: Tecnico): void{
+
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: `¿Qué desea eliminar al técnico ${tecnico.nombre}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.service.eliminar(tecnico.id).subscribe(() => {
+          this.tecnicos = this.tecnicos.filter(a => a !== tecnico);
+          Swal.fire('Eliminado:',`Técnico ${tecnico.nombre} eliminado correctamente.`,'success');
+        });
+      }
+      else{
+        Swal.fire('Cancelado:',`¡Eliminación cancelada!`,'warning');
+      }
+    });
   }
 
 }
