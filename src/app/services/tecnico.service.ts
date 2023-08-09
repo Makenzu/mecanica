@@ -46,4 +46,22 @@ export class TecnicosService {
   public eliminar(id: number): Observable<void>{
     return this.http.delete<void>(`${this.baseEndpoint}/${id}`);
   }
+
+  public crearConFoto(tecnico: Tecnico, archivo: File): Observable<Tecnico>{
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+    formData.append('nombre', tecnico.nombre);
+    formData.append('apellido', tecnico.apellido);
+    formData.append('email', tecnico.email);
+    return this.http.post<Tecnico>(this.baseEndpoint + '/crear-con-foto', formData);
+  }
+
+  public editarConFoto(tecnico: Tecnico, archivo: File): Observable<Tecnico>{
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+    formData.append('nombre', tecnico.nombre);
+    formData.append('apellido', tecnico.apellido);
+    formData.append('email', tecnico.email);
+    return this.http.put<Tecnico>(`${this.baseEndpoint}/editar-con-foto/${tecnico.id}`, formData);
+  }
 }
