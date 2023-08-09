@@ -1,0 +1,50 @@
+<div class="container" style="width: 70%;">
+    <div class="card bg-light mb-3"  style="padding: 5px;">
+        <div class="card-header" 
+             style="background-color: #130b20; color:aliceblue; border: 1px; 
+                    border-radius: 5px; padding: 4px; padding-bottom: 3px;">
+             {{ vehiculo.id? 'Actualizar registro': 'Registrar vehículo'}}
+        </div>
+        <div class="card-body" style="border: 1px solid #201b35;">
+            <img class="my-2" 
+                 src="assets/img/back.png" 
+                 style="width: 40px; box-shadow: 1px 1px 2px #130202; border-radius: 3px;"
+                 routerLink="/vehiculos" 
+                 title="volver">
+            <form>
+                <div class="form-group">
+                    <label for="patente">Patente</label>
+                    <input type="text" name="patente" class="form-control" id="patente" 
+                        [(ngModel)]="vehiculo.patente">
+                    <div class="alert alert-danger" style="padding: 2px;" *ngIf="error?.patente">
+                        {{ error.patente }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" name="marca" class="form-control" id="marca" 
+                        [(ngModel)]="vehiculo.marca">
+                    <div class="alert alert-danger" style="padding: 2px;" *ngIf="error?.marca">
+                        {{ error.marca }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="modelo">Modelo</label>
+                    <input type="text" name="modelo" class="form-control" id="modelo" 
+                        [(ngModel)]="vehiculo.modelo">
+                    <div class="alert alert-danger" style="padding: 2px;" *ngIf="error && error.modelo">
+                        {{ error.modelo }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <img class="my-2" 
+                         src="assets/img/guardar.png" 
+                         style="width: 40px; box-shadow: 1px 1px 2px #130202; float: right; margin-right: 20px; border-radius: 3px;"
+                         title="{{ vehiculo.id? 'Editar': 'Crear'}}" 
+                        (click)="vehiculo.id? editar(): crear()">
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+    </div>

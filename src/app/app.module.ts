@@ -11,6 +11,7 @@ import { LayoutModule } from './layout/layout.module';
 import { TecnicosFormComponent } from './components/tecnicos/tecnicos-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { VehiculosFormComponent } from './components/vehiculos/vehiculos-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     TecnicosFormComponent,
     VehiculosComponent,
     ActividadesComponent,
-    TecnicosFormComponent
+    TecnicosFormComponent,
+    VehiculosFormComponent
   ],
   imports: [
     BrowserModule,

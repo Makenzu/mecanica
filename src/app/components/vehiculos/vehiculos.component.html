@@ -1,28 +1,58 @@
 <div class="card bg-light mb-3">
-    <div class="card-header divHead" style="background-color: #130b20; color:aliceblue; border: 1px;">{{titulo}}</div>
+    <div class="card-header divHead">{{titulo}}</div>
     <div class="card-body divBody">
-        <table class="table table-hover table-striped">
-            <thead class="table-dark">
-                <tr>
+        <img class="my-2" 
+             style="width: 40px; box-shadow: 2px 2px 5px #130202; border-radius: 5px; margin-left: 8px;"
+             src="assets/img/add_car.png" 
+             routerLink="/vehiculos/form" 
+             title="crear">
+        <div class="alert alert-info" style="margin-top: 10px;" *ngIf="vehiculos?.length==0">
+            No hay registros en el sistema.
+        </div>
+        <table class="table table-hover table-striped" *ngIf="vehiculos.length>0 && vehiculos != undefined">
+            <thead class="table" >
+                <tr style="text-align: center;">
                     <th class="thHead">Id</th>
                     <th class="thHead">Patente</th>
                     <th class="thHead">Marca</th>
                     <th class="thHead">Modelo</th>
                     <th class="thHead">Creado en</th>
+                    <th class="thHead">Editar</th>
+                    <th class="thHead">Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let vehiculo of vehiculos">
-                    <td>{{vehiculo.id}}</td>
+                    <td>{{vehiculo.id}} </td>
                     <td>{{vehiculo.patente | uppercase}}</td>
                     <td>{{vehiculo.marca | uppercase}}</td>
-                    <td>{{vehiculo.modelo | uppercase}}</td>
+                    <td>{{vehiculo.modelo}}</td>
                     <td>{{vehiculo.createAt | date: 'yyyy/MM/dd HH:mm aa'}}</td>
+                    <td style="text-align: center;">
+                        <img src="assets/img/reg_edit.png" 
+                             style="width: 25px; box-shadow: 2px 2px 5px #130202;" 
+                             [routerLink]="['/vehiculos/form', vehiculo.id]" 
+                             title="Editar">
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="assets/img/delete_reg.png" 
+                             style="width: 25px; box-shadow: 2px 2px 5px #130202;" 
+                             (click)="eliminar(vehiculo)"
+                             title="Eliminar">
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              (page) = "paginar($event)"
+              showFirstLastButtons
+              class="float-left mx-2"
+              aria-label="Select page">
+        </mat-paginator>
         <br>
     </div>
 </div>
 
-    
