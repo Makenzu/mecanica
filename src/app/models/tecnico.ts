@@ -4,4 +4,5 @@ export class Tecnico {
     apellido!: string;
     email!: string;
     createAt!: string;
+    fotoHashCode!: number;
 }

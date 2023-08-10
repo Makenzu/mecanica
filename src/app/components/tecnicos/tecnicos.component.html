@@ -13,6 +13,7 @@
             <thead class="table" >
                 <tr style="text-align: center;">
                     <th class="thHead">Id</th>
+                    <th class="thHead">Foto</th>
                     <th class="thHead">Nomnbre</th>
                     <th class="thHead">Apellido</th>
                     <th class="thHead">Email</th>
@@ -23,7 +24,18 @@
             </thead>
             <tbody>
                 <tr *ngFor="let tecnico of tecnicos">
-                    <td>{{tecnico.id}} </td>
+                    <td style="text-align: center;">{{tecnico.id}} </td>
+                    <td style="text-align: center;">
+                        <img *ngIf="tecnico.fotoHashCode" 
+                            [src]="baseEndpoint + '/uploads/img/' + tecnico.id + '?fotoHashCode=' + tecnico.fotoHashCode"
+                            class="img-thumbnail rounded"
+                            style="width: 64px; cursor: pointer; ">
+
+                            <img *ngIf="!tecnico.fotoHashCode" 
+                            src="/assets/img/no_photo.png"
+                            class="img-thumbnail rounded"
+                            style="width: 64px; cursor: pointer; ">
+                    </td>
                     <td>{{tecnico.nombre | uppercase}}</td>
                     <td>{{tecnico.apellido | uppercase}}</td>
                     <td>{{tecnico.email}}</td>

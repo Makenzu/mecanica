@@ -113,5 +113,16 @@ export class TecnicosFormComponent implements OnInit {
 
   public seleccionarFoto(event: any): void {
     this.fotoSeleccionada = event.target.files[0];
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      this.fotoSeleccionada = null;
+      Swal.fire({
+        title: 'Formato incorrecto',
+        text: 'El archivo debe ser una imagen.',
+        icon: 'error',
+        timer: 3500,
+        color: '#ff0000',
+        backdrop: `rgba(19,11,32,0.9)`
+      })
+    }
   }
 }

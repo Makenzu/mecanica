@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2'
-import { TecnicosService } from 'src/app/services/tecnico.service';
-import { Tecnico } from 'src/app/models/tecnico';
+import { TecnicosService } from '../../services/tecnico.service';
+import { Tecnico } from '../../models/tecnico';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { apiTecnicos } from '../../../environments/environment';
 
 @Component({
   selector: 'app-tecnicos',
@@ -11,6 +12,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class TecnicosComponent implements OnInit {
 
+  public baseEndpoint = apiTecnicos.apiRoot;
+  
   public titulo: string = 'Listado de Tecnicos';
   public tecnicos: Tecnico[] = [];
 
